@@ -1,0 +1,23 @@
+{
+  "name": "portfolio",
+  "version": "0.0.0",
+  "description": "Play as a boss to interview me.",
+  "main": "main.js",
+  "scripts": {
+    "start": "gulp --require LiveScript",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "game",
+    "portfolio"
+  ],
+  "author": "caasi Huang",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp-concat": "^2.1.7",
+    "gulp-livescript": "^0.2.0",
+    "event-stream": "^3.1.0",
+    "gulp": "^3.5.5",
+    "LiveScript": "^1.2.0"
+  }
+}
