@@ -4,6 +4,7 @@ build-path = './'
 
 gulp.task \js ->
   event-stream.concat do
+    gulp.src 'LICENSE'
     gulp.src 'src/ls/*.ls'
         .pipe gulp-livescript bare: on
     gulp.src 'src/js/*.js'
