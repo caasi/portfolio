@@ -5,7 +5,7 @@ jade              = require \gulp-jade
 livereload-server = tiny-lr!
 livereload        = -> gulp-livereload livereload-server
 
-build-path = './build/'
+build-path = './'
 
 gulp.task \js ->
   event-stream.concat do

@@ -20,9 +20,9 @@
     "gulp-concat": "^2.1.7",
     "gulp-livescript": "^0.2.0",
     "gulp-jade": "^0.4.2",
-    "gulp-livereload": "^1.2.0"
+    "gulp-livereload": "^1.2.0",
     "event-stream": "^3.1.0",
     "node-static": "^0.7.3",
-    "tiny-lr": "0.0.5",
+    "tiny-lr": "0.0.5"
   }
 }
