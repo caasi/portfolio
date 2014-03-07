@@ -55,6 +55,7 @@ x$.position = setting.offset;
 x$.scale = setting.scale;
 stage.addChild(gameStage);
 renderer = PIXI.autoDetectRenderer($win.width(), $win.height());
+renderer.view.className = 'renderView';
 $('body').append(renderer.view);
 $(window).resize(function(){
   var dim, setting, x$;

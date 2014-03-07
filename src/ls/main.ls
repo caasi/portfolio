@@ -32,6 +32,7 @@ game-stage = new PIXI.Graphics
 stage.addChild game-stage
 
 renderer = PIXI.autoDetectRenderer $win.width!, $win.height!
+renderer.view.className = \renderView
 $(\body).append renderer.view
 
 $(window).resize !->
@@ -46,4 +47,3 @@ animate = !->
   requestAnimationFrame animate
   renderer.render stage
 requestAnimationFrame animate
-
