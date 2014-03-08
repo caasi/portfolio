@@ -1,7 +1,9 @@
 $win   = $ window
 config =
-  width:  320
-  height: 240
+  width:  160
+  height: 120
+  path:
+    image: './img/'
 
 dimension = ->
   w: $win.width!
@@ -19,6 +21,9 @@ compute-pos-scale = (dim) ->
     x: (dim.w - config.width  * s) / 2
     y: (dim.h - config.height * s) / 2
 
+# setup stage and engine
+PIXI.scaleModes.DEFAULT = PIXI.scaleModes.NEARST
+
 stage = new PIXI.Stage 0x000000
 
 dim = dimension!
@@ -30,6 +35,17 @@ game-stage = new PIXI.Graphics
   ..position = setting.offset
   ..scale    = setting.scale
 stage.addChild game-stage
+
+# sprites
+title = new PIXI.DisplayObjectContainer
+title-bg   = PIXI.Sprite.fromImage "#{config.path.image}title-background.png"
+title-text = PIXI.Sprite.fromImage "#{config.path.image}title.png"
+title
+  ..addChild title-bg
+  ..addChild title-text
+  ..x = (config.width - title-bg.width) / 2
+  ..y = 10
+game-stage.addChild title
 
 renderer = PIXI.autoDetectRenderer $win.width!, $win.height!
 renderer.view.className = \renderView

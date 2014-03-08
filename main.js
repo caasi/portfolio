@@ -14,11 +14,14 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  **/
 
-var $win, config, dimension, computePosScale, stage, dim, setting, x$, gameStage, renderer, animate;
+var $win, config, dimension, computePosScale, stage, dim, setting, x$, gameStage, title, titleBg, titleText, y$, renderer, animate;
 $win = $(window);
 config = {
-  width: 320,
-  height: 240
+  width: 160,
+  height: 120,
+  path: {
+    image: './img/'
+  }
 };
 dimension = function(){
   return {
@@ -44,6 +47,7 @@ computePosScale = function(dim){
     }
   };
 };
+PIXI.scaleModes.DEFAULT = PIXI.scaleModes.NEARST;
 stage = new PIXI.Stage(0x000000);
 dim = dimension();
 setting = computePosScale(dim);
@@ -54,6 +58,15 @@ x$.endFill();
 x$.position = setting.offset;
 x$.scale = setting.scale;
 stage.addChild(gameStage);
+title = new PIXI.DisplayObjectContainer;
+titleBg = PIXI.Sprite.fromImage(config.path.image + "title-background.png");
+titleText = PIXI.Sprite.fromImage(config.path.image + "title.png");
+y$ = title;
+y$.addChild(titleBg);
+y$.addChild(titleText);
+y$.x = (config.width - titleBg.width) / 2;
+y$.y = 10;
+gameStage.addChild(title);
 renderer = PIXI.autoDetectRenderer($win.width(), $win.height());
 renderer.view.className = 'renderView';
 $('body').append(renderer.view);

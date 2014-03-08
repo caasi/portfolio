@@ -22,7 +22,11 @@ gulp.task \html ->
       .pipe gulp.dest build-path
       .pipe livereload!
 
-gulp.task \build <[js html]>
+gulp.task \img ->
+  gulp.src 'src/img/*.png'
+      .pipe gulp.dest "#{build-path}img/"
+
+gulp.task \build <[js html img]>
 
 gulp.task \static (next) ->
   server = new node-static.Server build-path
