@@ -25,6 +25,7 @@ gulp.task \html ->
 gulp.task \img ->
   gulp.src 'src/img/*.png'
       .pipe gulp.dest "#{build-path}img/"
+      .pipe livereload!
 
 gulp.task \build <[js html img]>
 
@@ -40,6 +41,7 @@ gulp.task \static (next) ->
 gulp.task \watch ->
   gulp.watch 'src/ls/*.ls'    <[js]>
   gulp.watch 'src/index.jade' <[html]>
+  gulp.watch 'src/img/*.png'      <[img]>
 
 gulp.task \livereload ->
   port = 35729

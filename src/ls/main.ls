@@ -4,6 +4,8 @@ config =
   height: 120
   path:
     image: './img/'
+  color:
+    step: Math.PI * 9 / 8
 
 dimension = ->
   w: $win.width!
@@ -37,8 +39,18 @@ game-stage = new PIXI.Graphics
 stage.addChild game-stage
 
 # sprites
+color-count = 0
+color-matrix = [
+  1 0 0 0
+  0 1 0 0
+  0 0 1 0
+  0 0 0 1
+]
+filter = new PIXI.ColorMatrixFilter
+filter.matrix = color-matrix
 title = new PIXI.DisplayObjectContainer
 title-bg   = PIXI.Sprite.fromImage "#{config.path.image}title-background.png"
+title-bg.filters = [filter]
 title-text = PIXI.Sprite.fromImage "#{config.path.image}title.png"
 title
   ..addChild title-bg
@@ -48,7 +60,7 @@ title
 game-stage.addChild title
 
 renderer = PIXI.autoDetectRenderer $win.width!, $win.height!
-renderer.view.className = \renderView
+renderer.view.className = \rendererView
 $(\body).append renderer.view
 
 $(window).resize !->
@@ -62,4 +74,13 @@ $(window).resize !->
 animate = !->
   requestAnimationFrame animate
   renderer.render stage
+  # change color
+  color-matrix
+    ..1 =   3 * Math.sin color-count
+    ..2 =       Math.cos color-count
+    ..3 = 1.5 * Math.cos color-count
+    ..4 =   2 * Math.cos color-count / 3
+    ..5 =       Math.cos color-count / 2
+    ..6 =       Math.cos color-count / 4
+  color-count += config.color.step
 requestAnimationFrame animate
