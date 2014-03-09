@@ -8,24 +8,25 @@ livereload        = -> gulp-livereload livereload-server
 build-path = './'
 
 gulp.task \js ->
-  event-stream.concat do
-    gulp.src 'LICENSE'
-    gulp.src 'src/ls/*.ls'
-        .pipe livescript bare: on
-  .pipe gulp-concat 'main.js'
+  gulp.src do
+    * 'LICENSE'
+      'src/ls/actor.ls'
+      'src/ls/main.ls'
+  .pipe gulp-concat 'main.ls'
+  .pipe livescript!
   .pipe gulp.dest build-path
   .pipe livereload!
 
 gulp.task \html ->
   gulp.src 'src/index.jade'
-      .pipe jade!
-      .pipe gulp.dest build-path
-      .pipe livereload!
+  .pipe jade!
+  .pipe gulp.dest build-path
+  .pipe livereload!
 
 gulp.task \img ->
   gulp.src 'src/img/*.png'
-      .pipe gulp.dest "#{build-path}img/"
-      .pipe livereload!
+  .pipe gulp.dest "#{build-path}img/"
+  .pipe livereload!
 
 gulp.task \build <[js html img]>
 
@@ -41,7 +42,7 @@ gulp.task \static (next) ->
 gulp.task \watch ->
   gulp.watch 'src/ls/*.ls'    <[js]>
   gulp.watch 'src/index.jade' <[html]>
-  gulp.watch 'src/img/*.png'      <[img]>
+  gulp.watch 'src/img/*.png'  <[img]>
 
 gulp.task \livereload ->
   port = 35729
