@@ -30,6 +30,7 @@ PIXI.scaleModes.DEFAULT = PIXI.scaleModes.NEARST
 loader = new PIXI.AssetLoader [
   "#{config.path.image}title-background.png"
   "#{config.path.image}title.png"
+  #"#{config.path.image}boss.png"
 ]
 
 loader.addEventListener \onComplete ->
@@ -65,6 +66,23 @@ loader.addEventListener \onComplete ->
     ..x = (config.width - title-bg.width) / 2
     ..y = 10
   game-stage.addChild title
+
+  base = PIXI.BaseTexture.fromImage "#{config.path.image}boss.png"
+  boss = new PIXI.MovieClip [
+    new PIXI.Texture base, x: 0   y: 0 width: 39 height: 51
+    new PIXI.Texture base, x: 0   y: 0 width: 39 height: 51
+    new PIXI.Texture base, x: 39  y: 0 width: 39 height: 51
+    new PIXI.Texture base, x: 78  y: 0 width: 39 height: 51
+    new PIXI.Texture base, x: 78  y: 0 width: 39 height: 51
+    new PIXI.Texture base, x: 117 y: 0 width: 39 height: 51
+  ]
+  console.log boss
+  boss
+    ..x = 10
+    ..y = 60
+    ..animationSpeed = 0.5
+    ..play!
+  game-stage.addChild boss
 
   renderer = PIXI.autoDetectRenderer $win.width!, $win.height!
   renderer.view.className = \rendererView

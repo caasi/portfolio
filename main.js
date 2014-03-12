@@ -138,7 +138,7 @@
   PIXI.scaleModes.DEFAULT = PIXI.scaleModes.NEARST;
   loader = new PIXI.AssetLoader([config.path.image + "title-background.png", config.path.image + "title.png"]);
   loader.addEventListener('onComplete', function(){
-    var stage, dim, setting, x$, gameStage, colorCount, colorMatrix, filter, title, titleBg, titleText, y$, renderer, animate;
+    var stage, dim, setting, x$, gameStage, colorCount, colorMatrix, filter, title, titleBg, titleText, y$, base, boss, z$, renderer, animate;
     stage = new PIXI.Stage(0x000000);
     dim = dimension();
     setting = computePosScale(dim);
@@ -163,6 +163,47 @@
     y$.x = (config.width - titleBg.width) / 2;
     y$.y = 10;
     gameStage.addChild(title);
+    base = PIXI.BaseTexture.fromImage(config.path.image + "boss.png");
+    boss = new PIXI.MovieClip([
+      new PIXI.Texture(base, {
+        x: 0,
+        y: 0,
+        width: 39,
+        height: 51
+      }), new PIXI.Texture(base, {
+        x: 0,
+        y: 0,
+        width: 39,
+        height: 51
+      }), new PIXI.Texture(base, {
+        x: 39,
+        y: 0,
+        width: 39,
+        height: 51
+      }), new PIXI.Texture(base, {
+        x: 78,
+        y: 0,
+        width: 39,
+        height: 51
+      }), new PIXI.Texture(base, {
+        x: 78,
+        y: 0,
+        width: 39,
+        height: 51
+      }), new PIXI.Texture(base, {
+        x: 117,
+        y: 0,
+        width: 39,
+        height: 51
+      })
+    ]);
+    console.log(boss);
+    z$ = boss;
+    z$.x = 10;
+    z$.y = 60;
+    z$.animationSpeed = 0.5;
+    z$.play();
+    gameStage.addChild(boss);
     renderer = PIXI.autoDetectRenderer($win.width(), $win.height());
     renderer.view.className = 'rendererView';
     $('body').append(renderer.view);
